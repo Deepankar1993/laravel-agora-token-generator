@@ -1,38 +1,43 @@
 {
-    "name": "tomatophp/laravel-agora",
-    "type": "library",
-    "description": "Agora Token Generator With easy to use Service Class",
-    "keywords": [
-        "php",
-        "laravel",
-        "template"
-    ],
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "TomatoPHP\\LaravelAgora\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TomatoPHP\\LaravelAgora\\LaravelAgoraServiceProvider"
-            ]
-        }
-    },
-    "authors": [
-        {
-            "name": "Fady Mondy",
-            "email": "info@3x1.io"
-        }
-    ],
-    "require": {
-        "php": "^8.0.2",
-        "tomatophp/console-helpers": "^1.0"
+  "name": "cyberdeep/laravel-agora-token-generator",
+  "version": "1.0.2",
+  "type": "library",
+  "description": "Agora Token Generator With easy to use Service Class",
+  "keywords": [
+    "php",
+    "laravel",
+    "agora",
+    "token",
+    "generator"
+  ],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "CyberDeep\\LaravelAgoraTokenGenerator\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CyberDeep\\LaravelAgoraTokenGenerator\\LaravelAgoraTokenGeneratorServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "Fady Mondy",
+      "email": "info@3x1.io"
+    }
+  ],
+  "require": {
+    "php": "^8.0.2",
+    "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

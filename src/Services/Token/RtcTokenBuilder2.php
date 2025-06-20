@@ -1,11 +1,12 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceRtc;
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceRtm;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceRtc;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceRtm;
 
-class RtcTokenBuilder2 {
+class RtcTokenBuilder2
+{
     /**
      * RECOMMENDED. Use this role for a voice/video call or a live broadcast, if
      * your scenario does not require authentication for
@@ -37,14 +38,15 @@ class RtcTokenBuilder2 {
      *                          ROLE_SUBSCRIBER: An audience(default) in a live-broadcast profile.
      * @param $tokenExpire :    Represented by the number of seconds elapsed since now. If, for example, you want to access the Agora Service within 10 minutes after the token is generated, set $tokenExpire as 600(seconds).
      * @param $privilegeExpire :Represented by the number of seconds elapsed since now. If, for example, you want to enable your privilege for 10 minutes, set $privilegeExpire as 600(seconds).
-     * @return The RTC token.
+     * @return  The RTC token.
      */
-    public static function buildTokenWithUid($appId, $appCertificate, $channelName, $uid, $role, $tokenExpire, $privilegeExpire = 0) {
+    public static function buildTokenWithUid($appId, $appCertificate, $channelName, $uid, $role, $tokenExpire, $privilegeExpire = 0)
+    {
         return self::buildTokenWithUserAccount($appId, $appCertificate, $channelName, $uid, $role, $tokenExpire, $privilegeExpire);
     }
 
     /**
-     * Build the RTC token with account.
+     * Build the RTC token with an account.
      *
      * @param $appId :          The App ID issued to you by Agora. Apply for a new App ID from
      *                          Agora Dashboard if it is missing from your kit. See Get an App ID.
@@ -58,7 +60,8 @@ class RtcTokenBuilder2 {
      * @param $privilegeExpire :Represented by the number of seconds elapsed since now. If, for example, you want to enable your privilege for 10 minutes, set $privilegeExpire as 600(seconds).
      * @return The RTC token.
      */
-    public static function buildTokenWithUserAccount($appId, $appCertificate, $channelName, $account, $role, $tokenExpire, $privilegeExpire = 0) {
+    public static function buildTokenWithUserAccount($appId, $appCertificate, $channelName, $account, $role, $tokenExpire, $privilegeExpire = 0)
+    {
         $token = new AccessToken2($appId, $appCertificate, $tokenExpire);
         $serviceRtc = new ServiceRtc($channelName, $account);
 
@@ -129,7 +132,8 @@ class RtcTokenBuilder2 {
         $pubAudioPrivilegeExpire,
         $pubVideoPrivilegeExpire,
         $pubDataStreamPrivilegeExpire
-    ) {
+    )
+    {
         return self::buildTokenWithUserAccountAndPrivilege(
             $appId,
             $appCertificate,
@@ -199,7 +203,8 @@ class RtcTokenBuilder2 {
         $pubAudioPrivilegeExpire,
         $pubVideoPrivilegeExpire,
         $pubDataStreamPrivilegeExpire
-    ) {
+    )
+    {
         $token = new AccessToken2($appId, $appCertificate, $tokenExpire);
         $serviceRtc = new ServiceRtc($channelName, $account);
 
@@ -233,9 +238,10 @@ class RtcTokenBuilder2 {
         string $channelName,
         string $account,
         string $role,
-        int $tokenExpire,
-        int $privilegeExpire = 0
-    ) {
+        int    $tokenExpire,
+        int    $privilegeExpire = 0
+    )
+    {
         $token = new AccessToken2($appId, $appCertificate, $tokenExpire);
         $serviceRtc = new ServiceRtc($channelName, $account);
 

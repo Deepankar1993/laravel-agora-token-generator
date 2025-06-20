@@ -1,22 +1,59 @@
-![Screenshot](https://github.com/tomatophp/laravel-agora/blob/master/art/screenshot.png)
+# Laravel Agora Token Generator
 
-# Laravel Agora
+Agora Token Generator With easy to use Service Class for Laravel applications.
 
-Agora Token Generator With easy to use Service Class
+## Requirements
+
+- PHP 8.0.2 or higher
+- Laravel 8.x, 9.x, 10.x, 11.x, or 12.x
 
 ## Installation
 
+### From Packagist
+
 ```bash
-composer require tomatophp/laravel-agora
+composer require cyberdeep/laravel-agora-token-generator:^1.0
 ```
 
-## Support
+If you encounter stability issues, you can explicitly allow dev stability:
 
-you can join our discord server to get support [TomatoPHP](https://discord.gg/VZc8nBJ3ZU)
+```bash
+composer require cyberdeep/laravel-agora-token-generator:^1.0 --with-all-dependencies
+```
 
-## Docs
+### Local Installation
 
-you can check docs of this package on [Docs](https://docs.tomatophp.com/plugins/laravel-agora)
+For instructions on how to install this package locally during development, please
+see [LOCAL_INSTALLATION.md](LOCAL_INSTALLATION.md).
+
+## Configuration
+
+After installing the package, publish the configuration file:
+
+```bash
+php artisan vendor:publish --tag=laravel-agora-token-generator-config
+```
+
+Then, add your Agora credentials to your `.env` file:
+
+```
+AGORA_APP_ID=your-app-id
+AGORA_APP_CERTIFICATE=your-app-certificate
+```
+
+## Usage
+
+```php
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Agora;
+
+// Generate a token for a publisher
+$token = Agora::make($userId)
+    ->channel('channel-name')
+    ->uId('user-id')
+    ->join(false) // false for publisher, true for subscriber
+    ->audioOnly(false) // false for video+audio, true for audio only
+    ->token();
+```
 
 ## Changelog
 

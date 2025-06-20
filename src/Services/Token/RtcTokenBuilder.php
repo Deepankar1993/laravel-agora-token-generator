@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
 class RtcTokenBuilder
 {
@@ -22,13 +22,13 @@ class RtcTokenBuilder
      * @return string|null
      */
     public static function build(
-        string $appID,
-        string $appCertificate,
-        string $channelName,
-        string $uid,
-        string $role,
-        int|float $privilegeExpireTs,
-        string|null $type='video'
+        string      $appID,
+        string      $appCertificate,
+        string      $channelName,
+        string      $uid,
+        string      $role,
+        int|float   $privilegeExpireTs,
+        string|null $type = 'video'
     ): string|null
     {
 
@@ -38,15 +38,14 @@ class RtcTokenBuilder
         //Get Token Privileges
         $privileges = AccessToken::$privileges;
 
-        if($token !== null){
+        if ($token !== null) {
             //Add Join Channel Privilege
             $token->addPrivilege($privileges["kJoinChannel"], $privilegeExpireTs);
 
-            if(
+            if (
                 ($role === self::$roles['RoleAttendee']) ||
                 ($role === self::$roles['RolePublisher']) ||
-                ($role === self::$roles['RoleAdmin']))
-            {
+                ($role === self::$roles['RoleAdmin'])) {
                 $type === 'video' ?: $token->addPrivilege($privileges["kPublishVideoStream"], $privilegeExpireTs);
                 $token->addPrivilege($privileges["kPublishAudioStream"], $privilegeExpireTs);
                 $token->addPrivilege($privileges["kPublishDataStream"], $privilegeExpireTs);

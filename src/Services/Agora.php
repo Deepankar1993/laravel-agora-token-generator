@@ -1,9 +1,10 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services;
 
 use Exception;
-use TomatoPHP\LaravelAgora\Services\Token\RtcTokenBuilder;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\RtcTokenBuilder;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\RtcTokenBuilder2;
 
 /**
  *
@@ -17,7 +18,7 @@ class Agora
     /**
      * @var string|null
      */
-    protected string|null $channel="agora";
+    protected string|null $channel = "agora";
     /**
      * @var string|null
      */
@@ -25,7 +26,7 @@ class Agora
     /**
      * @var bool
      */
-    protected bool $audio=false;
+    protected bool $audio = false;
     /**
      * @var bool
      */
@@ -54,7 +55,7 @@ class Agora
      * @param bool|null $join
      * @return $this
      */
-    public function join(bool|null $join= true): static
+    public function join(bool|null $join = true): static
     {
         $this->join = $join;
         return $this;
@@ -64,7 +65,7 @@ class Agora
      * @param bool|null $audio
      * @return $this
      */
-    public function audioOnly(bool|null $audio=true): static
+    public function audioOnly(bool|null $audio = true): static
     {
         $this->audio = $audio;
         return $this;
@@ -95,32 +96,69 @@ class Agora
      */
     public function token()
     {
-        $appID = config('laravel-agora.agora.app_id');
-        $appCertificate = config('laravel-agora.agora.app_certificate');
+        $appID = config('laravel-agora-token-generator.agora.app_id');
+        $appCertificate = config('laravel-agora-token-generator.agora.app_certificate');
+        $tokenBuilder = config('laravel-agora-token-generator.agora.token_builder', 'v1');
 
-        if($appID && $appCertificate){
-            $channelName = $this->channel . '.'. $this->id;
-            if ($this->join) {
-                $role = RtcTokenBuilder::$roles['RoleSubscriber'];
-            } else {
-                $role = RtcTokenBuilder::$roles['RolePublisher'];
-            }
+        if ($appID && $appCertificate) {
+            $channelName = $this->channel . '.' . $this->id;
 
             //Build a Time
             $expireTimeInSeconds = 3600;
             $currentTimestamp = now()->getTimestamp();
             $privilegeExpiredTs = $currentTimestamp + $expireTimeInSeconds;
 
+            if ($tokenBuilder === 'v2') {
+                // Use RtcTokenBuilder2
+                if ($this->join) {
+                    $role = RtcTokenBuilder2::ROLE_SUBSCRIBER;
+                } else {
+                    $role = RtcTokenBuilder2::ROLE_PUBLISHER;
+                }
 
-            $token = RtcTokenBuilder::build(
-                appID: $appID,
-                appCertificate: $appCertificate,
-                channelName: $channelName,
-                uid: $this->uId,
-                role: $role,
-                privilegeExpireTs: $privilegeExpiredTs,
-                type: $this->audio ? 'audio' : 'video'
-            );
+                if ($this->audio) {
+                    // For audio only, set video privilege expiration to 0
+                    $token = RtcTokenBuilder2::buildTokenWithUserAccountAndPrivilege(
+                        $appID,
+                        $appCertificate,
+                        $channelName,
+                        $this->uId,
+                        $privilegeExpiredTs, // token expire
+                        $privilegeExpiredTs, // join channel privilege
+                        $privilegeExpiredTs, // publish audio privilege
+                        0, // publish video privilege (0 for audio only)
+                        $privilegeExpiredTs // publish data privilege
+                    );
+                } else {
+                    // For video, set all privileges
+                    $token = RtcTokenBuilder2::buildTokenWithUserAccount(
+                        $appID,
+                        $appCertificate,
+                        $channelName,
+                        $this->uId,
+                        $role,
+                        $privilegeExpiredTs,
+                        $privilegeExpiredTs
+                    );
+                }
+            } else {
+                // Use RtcTokenBuilder (v1)
+                if ($this->join) {
+                    $role = RtcTokenBuilder::$roles['RoleSubscriber'];
+                } else {
+                    $role = RtcTokenBuilder::$roles['RolePublisher'];
+                }
+
+                $token = RtcTokenBuilder::build(
+                    appID: $appID,
+                    appCertificate: $appCertificate,
+                    channelName: $channelName,
+                    uid: $this->uId,
+                    role: $role,
+                    privilegeExpireTs: $privilegeExpiredTs,
+                    type: $this->audio ? 'audio' : 'video'
+                );
+            }
 
             return $token;
         }

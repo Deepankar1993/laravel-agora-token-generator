@@ -1,5 +1,5 @@
 <?php
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
 class AccessToken
 {

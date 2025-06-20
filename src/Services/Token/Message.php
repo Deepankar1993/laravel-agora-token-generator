@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
 use DateTime;
 use Exception;
