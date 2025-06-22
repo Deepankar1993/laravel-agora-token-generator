@@ -1,5 +1,5 @@
 <?php
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 /**
  * Util class for packing and unpacking data
  */

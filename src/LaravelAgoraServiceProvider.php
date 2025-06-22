@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora;
+namespace CyberDeep\LaravelAgoraTokenGenerator;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -10,12 +10,12 @@ class LaravelAgoraServiceProvider extends ServiceProvider
     public function register(): void
     {
         //Register Config file
-        $this->mergeConfigFrom(__DIR__.'/../config/laravel-agora.php', 'laravel-agora');
+        $this->mergeConfigFrom(__DIR__.'/../config/laravel-agora-token-generator.php', 'laravel-agora-token-generator');
 
         //Publish Config
         $this->publishes([
-           __DIR__.'/../config/laravel-agora.php' => config_path('laravel-agora.php'),
-        ], 'laravel-agora-config');
+           __DIR__.'/../config/laravel-agora-token-generator.php' => config_path('laravel-agora-token-generator.php'),
+        ], 'laravel-agora-token-generator-config');
 
     }
 

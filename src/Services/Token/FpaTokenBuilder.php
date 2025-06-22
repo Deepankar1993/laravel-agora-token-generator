@@ -1,9 +1,9 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
-use TomatoPHP\LaravelAgora\Services\Token\AccessToken2;
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceFpa;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\AccessToken2;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceFpa;
 
 class FpaTokenBuilder {
     /**

@@ -1,0 +1,6 @@
+vendor
+vendor/*
+/.idea/deployment.xml
+/.idea/laravel-idea.xml
+/.idea/workspace.xml
+/composer.lock

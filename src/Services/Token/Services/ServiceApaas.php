@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token\Services;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services;
 
-use TomatoPHP\LaravelAgora\Services\Token\Util;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Util;
 
 class ServiceApaas extends Service {
     const SERVICE_TYPE = 7;

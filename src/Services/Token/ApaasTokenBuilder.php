@@ -1,11 +1,11 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
-use TomatoPHP\LaravelAgora\Services\Token\AccessToken2;
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceApaas;
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceChat;
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceRtm;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\AccessToken2;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceApaas;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceChat;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceRtm;
 
 class ApaasTokenBuilder
 {

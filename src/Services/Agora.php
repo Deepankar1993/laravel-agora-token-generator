@@ -116,31 +116,41 @@ class Agora
                     $role = RtcTokenBuilder2::ROLE_PUBLISHER;
                 }
 
-                if ($this->audio) {
-                    // For audio only, set video privilege expiration to 0
-                    $token = RtcTokenBuilder2::buildTokenWithUserAccountAndPrivilege(
-                        $appID,
-                        $appCertificate,
-                        $channelName,
-                        $this->uId,
-                        $privilegeExpiredTs, // token expire
-                        $privilegeExpiredTs, // join channel privilege
-                        $privilegeExpiredTs, // publish audio privilege
-                        0, // publish video privilege (0 for audio only)
-                        $privilegeExpiredTs // publish data privilege
-                    );
-                } else {
-                    // For video, set all privileges
-                    $token = RtcTokenBuilder2::buildTokenWithUserAccount(
-                        $appID,
-                        $appCertificate,
-                        $channelName,
-                        $this->uId,
-                        $role,
-                        $privilegeExpiredTs,
-                        $privilegeExpiredTs
-                    );
-                }
+                $token = RtcTokenBuilder2::buildTokenWithUid(
+                    $appID,
+                    $appCertificate,
+                    $channelName,
+                    $this->uId,
+                    $role,
+                    $privilegeExpiredTs,
+                    $privilegeExpiredTs
+                );
+
+//                if ($this->audio) {
+//                    // For audio only, set video privilege expiration to 0
+//                    $token = RtcTokenBuilder2::buildTokenWithUserAccountAndPrivilege(
+//                        $appID,
+//                        $appCertificate,
+//                        $channelName,
+//                        $this->uId,
+//                        $privilegeExpiredTs, // token expire
+//                        $privilegeExpiredTs, // join channel privilege
+//                        $privilegeExpiredTs, // publish audio privilege
+//                        0, // publish video privilege (0 for audio only)
+//                        $privilegeExpiredTs // publish data privilege
+//                    );
+//                } else {
+//                    // For video, set all privileges
+//                    $token = RtcTokenBuilder2::buildTokenWithUserAccount(
+//                        $appID,
+//                        $appCertificate,
+//                        $channelName,
+//                        $this->uId,
+//                        $role,
+//                        $privilegeExpiredTs,
+//                        $privilegeExpiredTs
+//                    );
+//                }
             } else {
                 // Use RtcTokenBuilder (v1)
                 if ($this->join) {

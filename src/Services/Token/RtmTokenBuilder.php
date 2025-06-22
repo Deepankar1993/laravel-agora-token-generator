@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
-use TomatoPHP\LaravelAgora\Services\Token\AccessToken;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\AccessToken;
 
 class RtmTokenBuilder {
 

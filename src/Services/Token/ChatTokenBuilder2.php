@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\LaravelAgora\Services\Token;
+namespace CyberDeep\LaravelAgoraTokenGenerator\Services\Token;
 
-use TomatoPHP\LaravelAgora\Services\Token\Services\ServiceChat;
+use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceChat;
 
 class ChatTokenBuilder2
 {
