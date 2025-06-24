@@ -21,6 +21,11 @@ class LaravelAgoraServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //you boot methods here
+        // Register commands if running in console
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \CyberDeep\LaravelAgoraTokenGenerator\Commands\GenerateAgoraTokenCommand::class,
+            ]);
+        }
     }
 }

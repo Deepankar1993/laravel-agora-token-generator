@@ -51,6 +51,8 @@ class Message
         return $buffer;
     }
 
+    
+
     /**
      * @param string $msg
      * @return void

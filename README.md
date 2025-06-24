@@ -43,6 +43,8 @@ AGORA_APP_CERTIFICATE=your-app-certificate
 
 ## Usage
 
+### Programmatic Usage
+
 ```php
 use CyberDeep\LaravelAgoraTokenGenerator\Services\Agora;
 
@@ -54,6 +56,30 @@ $token = Agora::make($userId)
     ->audioOnly(false) // false for video+audio, true for audio only
     ->token();
 ```
+
+### Console Command
+
+You can also generate tokens directly from the command line:
+
+```bash
+php artisan agora:generate-token channel-name user-id
+```
+
+Options:
+- `--join`: Generate a token for a subscriber (audience) instead of a publisher (host)
+- `--audio-only`: Generate a token for audio-only mode
+
+For more detailed examples and usage instructions, see [examples/generate_token.md](examples/generate_token.md).
+
+### Standalone Token Generator
+
+If you need to generate tokens without Laravel integration, you can use the standalone token generator:
+
+```bash
+php standalone_token_generator.php <app_id> <app_certificate> <channel> <uid> [--join] [--audio-only] [--v2]
+```
+
+For more information about the standalone token generator, see [standalone_token_generator.md](standalone_token_generator.md).
 
 ## Changelog
 

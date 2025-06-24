@@ -62,6 +62,7 @@ class RtcTokenBuilder2
      */
     public static function buildTokenWithUserAccount($appId, $appCertificate, $channelName, $account, $role, $tokenExpire, $privilegeExpire = 0)
     {
+
         $token = new AccessToken2($appId, $appCertificate, $tokenExpire);
         $serviceRtc = new ServiceRtc($channelName, $account);
 

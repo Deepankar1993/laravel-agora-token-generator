@@ -101,7 +101,8 @@ class Agora
         $tokenBuilder = config('laravel-agora-token-generator.agora.token_builder', 'v1');
 
         if ($appID && $appCertificate) {
-            $channelName = $this->channel . '.' . $this->id;
+            // Use only the channel name without concatenating with ID to match Agora expectations
+            $channelName = $this->channel;
 
             //Build a Time
             $expireTimeInSeconds = 3600;
@@ -116,6 +117,7 @@ class Agora
                     $role = RtcTokenBuilder2::ROLE_PUBLISHER;
                 }
 
+                // Use buildTokenWithUid for both audio and video modes for consistency
                 $token = RtcTokenBuilder2::buildTokenWithUid(
                     $appID,
                     $appCertificate,
@@ -125,32 +127,6 @@ class Agora
                     $privilegeExpiredTs,
                     $privilegeExpiredTs
                 );
-
-//                if ($this->audio) {
-//                    // For audio only, set video privilege expiration to 0
-//                    $token = RtcTokenBuilder2::buildTokenWithUserAccountAndPrivilege(
-//                        $appID,
-//                        $appCertificate,
-//                        $channelName,
-//                        $this->uId,
-//                        $privilegeExpiredTs, // token expire
-//                        $privilegeExpiredTs, // join channel privilege
-//                        $privilegeExpiredTs, // publish audio privilege
-//                        0, // publish video privilege (0 for audio only)
-//                        $privilegeExpiredTs // publish data privilege
-//                    );
-//                } else {
-//                    // For video, set all privileges
-//                    $token = RtcTokenBuilder2::buildTokenWithUserAccount(
-//                        $appID,
-//                        $appCertificate,
-//                        $channelName,
-//                        $this->uId,
-//                        $role,
-//                        $privilegeExpiredTs,
-//                        $privilegeExpiredTs
-//                    );
-//                }
             } else {
                 // Use RtcTokenBuilder (v1)
                 if ($this->join) {

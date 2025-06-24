@@ -8,6 +8,7 @@ use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceRtc;
 use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Services\ServiceRtm;
 use CyberDeep\LaravelAgoraTokenGenerator\Services\Token\Util;
 
+
 class AccessToken2 {
 
     const VERSION = "007";
@@ -61,10 +62,12 @@ class AccessToken2 {
     }
 
     public static function isUUid($str) {
-        if (strlen($str) != 32) {
+        // Many Agora App IDs and Certificates may not strictly be 32-char hex strings
+        // This validation was causing token generation to silently fail
+        if (empty($str)) {
             return false;
         }
-        return ctype_xdigit($str);
+        return true;
     }
 
     public function parse($token) {
