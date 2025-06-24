@@ -1,6 +1,6 @@
 # Laravel Agora Token Generator
 
-Agora Token Generator With easy to use Service Class for Laravel applications.
+Agora Token Generator With easy to use Service Class for Laravel applications. This package supports both Agora V1 and V2 token generation, including V2 tokens that start with "007".
 
 ## Requirements
 
@@ -39,6 +39,7 @@ Then, add your Agora credentials to your `.env` file:
 ```
 AGORA_APP_ID=your-app-id
 AGORA_APP_CERTIFICATE=your-app-certificate
+AGORA_TOKEN_BUILDER=v1  # Use 'v1' for RtcTokenBuilder or 'v2' for RtcTokenBuilder2 (generates tokens starting with 007)
 ```
 
 ## Usage
@@ -56,6 +57,8 @@ $token = Agora::make($userId)
     ->audioOnly(false) // false for video+audio, true for audio only
     ->token();
 ```
+
+The token generation method will use either V1 or V2 based on your configuration setting (`AGORA_TOKEN_BUILDER`).
 
 ### Console Command
 
@@ -79,7 +82,24 @@ If you need to generate tokens without Laravel integration, you can use the stan
 php standalone_token_generator.php <app_id> <app_certificate> <channel> <uid> [--join] [--audio-only] [--v2]
 ```
 
+The `--v2` flag enables Agora V2 token generation, which produces tokens that start with "007".
+
 For more information about the standalone token generator, see [standalone_token_generator.md](standalone_token_generator.md).
+
+## Token Versions
+
+This package supports two versions of Agora tokens:
+
+### V1 Tokens
+- Generated using the `RtcTokenBuilder` class
+- Default token version if not specified
+- Set `AGORA_TOKEN_BUILDER=v1` in your `.env` file
+
+### V2 Tokens
+- Generated using the `RtcTokenBuilder2` class
+- Tokens start with "007"
+- Provides enhanced security and features
+- Set `AGORA_TOKEN_BUILDER=v2` in your `.env` file
 
 ## Changelog
 
